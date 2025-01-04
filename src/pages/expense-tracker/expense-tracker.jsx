@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { useAddTransaction } from "../../hooks/useAddTransaction";
 import { useGetTransaction } from "../../hooks/useGetTransaction";
-import { useGetUserInfo } from "../../hooks/useGetUserInfo";  // Import the custom hook
-import { useSignOut } from "../../hooks/useSignOut"; // Import the sign-out hook
+import { useGetUserInfo } from "../../hooks/useGetUserInfo";
+import { useSignOut } from "../../hooks/useSignOut";
+import { Analytics } from "./analytics";
 import "./style.css";
 
 export const ExpenseTracker = () => {
     const { addTransaction, deleteTransaction } = useAddTransaction();
     const { transactions } = useGetTransaction();
-    const { name, profilePhoto, isAuth } = useGetUserInfo();  
-    const { signOut } = useSignOut(); 
+    const { name, profilePhoto, isAuth } = useGetUserInfo();
+    const { signOut } = useSignOut();
 
     const [description, setDescription] = useState("");
     const [transactionAmount, setTransactionAmount] = useState(0);
@@ -37,21 +38,21 @@ export const ExpenseTracker = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         addTransaction({ description, transactionAmount, transactionType });
-        setDescription(""); 
-        setTransactionAmount(0); 
+        setDescription("");
+        setTransactionAmount(0);
     };
 
     const handleSignOut = () => {
-        signOut(); 
+        signOut();
+    };
+
+    const handleDelete = (id) => {
+        deleteTransaction(id);
     };
 
     if (!isAuth) {
         return <p>Please log in to access the Expense Tracker.</p>;
     }
-
-    const handleDelete = (id) => {
-        deleteTransaction(id); 
-    };
 
     return (
         <>
@@ -97,26 +98,26 @@ export const ExpenseTracker = () => {
                         onChange={(e) => setTransactionAmount(parseFloat(e.target.value))}
                     />
                     <div>
-                        <input
-                            type="radio"
-                            id="expense"
-                            name="transactionType"
-                            value="expense"
-                            checked={transactionType === "expense"}
-                            onChange={(e) => setTransactionType(e.target.value)}
-                        />
-                        <label htmlFor="expense" style={{ color: '#000000' }}>Expense</label>
+    <input
+        type="radio"
+        id="expense"
+        name="transactionType"
+        value="expense"
+        checked={transactionType === "expense"}
+        onChange={(e) => setTransactionType(e.target.value)}
+    />
+    <label htmlFor="expense" style={{ color: '#000000', marginLeft: '5px' }}>Expense</label>
 
-                        <input
-                            type="radio"
-                            id="income"
-                            name="transactionType"
-                            value="income"
-                            checked={transactionType === "income"}
-                            onChange={(e) => setTransactionType(e.target.value)}
-                        />
-                        <label htmlFor="income" style={{ color: '#000000' }}>Income</label>
-                    </div>
+    <input
+        type="radio"
+        id="income"
+        name="transactionType"
+        value="income"
+        checked={transactionType === "income"}
+        onChange={(e) => setTransactionType(e.target.value)}
+    />
+    <label htmlFor="income" style={{ color: '#000000', marginLeft: '5px' }}>Income</label>
+</div>
                     <button type="submit">Add Transaction</button>
                 </form>
             </div>
@@ -134,6 +135,8 @@ export const ExpenseTracker = () => {
                     ))}
                 </ul>
             </div>
+
+            <Analytics income={income} expense={expense} />
         </>
     );
 };
