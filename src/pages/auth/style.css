@@ -1,0 +1,51 @@
+/* General login page styling */
+.login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f7f9fc; /* Light background */
+    font-family: Arial, sans-serif;
+}
+
+/* Text styling */
+.login-page p {
+    font-size: 20px;
+    color: #333333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Google button styling */
+.login-with-google-btn {
+    background-color: #4285f4; /* Google Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for button */
+.login-with-google-btn:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05); /* Slightly grow */
+}
+
+/* Add responsiveness */
+@media (max-width: 600px) {
+    .login-with-google-btn {
+        width: 80%; /* Make button full width on small screens */
+        font-size: 14px;
+    }
+
+    .login-page p {
+        font-size: 18px; /* Adjust text size */
+    }
+}

@@ -227,3 +227,28 @@ body::before {
     max-width: 800px; /* Limits the width on larger screens */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds subtle shadow for depth */
 }
+.signout-button {
+    position: absolute;
+    top: 1px; /* Adjust the distance from the top */
+    right: 340px; /* Adjust the distance from the right */
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Adjust padding for better appearance */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+
+
+
+.signout-button:hover {
+    background-color: #e63939;
+}
+
+.signout-button:active {
+    background-color: #cc3333;
+}
